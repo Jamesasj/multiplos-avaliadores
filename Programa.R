@@ -12,14 +12,28 @@ for (documento in lista_doc) {
   dados <- read.csv(documento,sep = ";")
   varl <- data_frame(x = dados[,7])
   scala <- data.frame(x =c(0:1000,100))
-  
   plot <- plot + 
     stat_function(data = varl, aes(x = scala),fun = dnorm, args = list(mean(varl$x), sd(varl$x)), colour = cor1) +
     geom_vline(xintercept = mean(varl$x), colour = cor1,  linetype = "dashed")
-
 }
 plot
 dev.off()
+
+
+jpeg("01_GERAL.jpg")
+plot <- ggplot()
+for (documento in lista_doc) {
+  cor1 <- sample(1:100,1)
+  dados <- read.csv(documento,sep = ";")
+  varl <- data_frame(x = dados[,7])
+  scala <- data.frame(x =c(0:1000,100))
+  plot <- plot + 
+    stat_function(data = varl, aes(x = scala),fun = dnorm, args = list(mean(varl$x), sd(varl$x)), colour = cor1) +
+    geom_vline(xintercept = mean(varl$x), colour = cor1,  linetype = "dashed")
+}
+plot
+dev.off()
+
 
 
 ##### Analise cohen kappa #######
